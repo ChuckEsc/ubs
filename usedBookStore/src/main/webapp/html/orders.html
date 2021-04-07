@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <!-- shop css -->
+    <link href="css/shop.css" type="text/css" rel="stylesheet" media="all">
+    <!-- checkout css -->
+    <link href="css/checkout.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <!-- logo -->
+    <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+    <!-- titles -->
+    <link href="http://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i"
+          rel="stylesheet">
+    <!-- body -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+          rel="stylesheet">
+    <!-- //online-fonts -->
+</head>
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<div id="home">
+    <!-- header -->
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="main-nav">
+            <div class="container">
+
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">UsedBookStore</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1>
+                        <a class="navbar-brand" href="index.html">UsedBookStore</a>
+                    </h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse nav-right" id="bar">
+                    <ul class="nav navbar-nav navbar-left cl-effect-15">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a class="page-scroll" href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a href="index.html">首页</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">书城
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="shop.html">所有书</a>
+                                </li>
+                                <li>
+                                    <a href="checkout.html">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="publish.html">我要发布</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">详情
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a :href="'orders.html?id='+user.id">订单</a>
+                                </li>
+                                <li>
+                                    <a href="my_house.html">我的书</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">账号
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="edit.html">编辑资料</a></li>
+                                <li>
+                                    <a href="admin.html">管理员</a>
+                                </li>
+                                <li>
+                                    <a href="#" @click="logout()">退出</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html" title="SignIn & SignUp" v-if="!log">
+                                <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                            </a>
+                            <a href="edit.html" title="SignIn & SignUp" v-else>
+                                <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- shopping cart -->
+                    <div class="cart-mainf">
+                        <div class="chrcart chrcart2 cart cart box_1">
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+
+                                <a href="login.html" v-if="user==null">
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                </a>
+                                <a href="checkout.html" v-else>
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //shopping cart ends here -->
+                </div>
+                <!-- /.navbar-collapse -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.container -->
+        </div>
+    </nav>
+    <!-- //navbar ends here -->
+    <!-- breadcrumbs -->
+    <div class="crumbs text-center">
+        <div class="container">
+            <div class="row">
+                <ul class="btn-group btn-breadcrumb bc-list">
+                    <li class="btn btn1">
+                        <a href="index.html">
+                            <i class="glyphicon glyphicon-home"></i>
+                        </a>
+                    </li>
+                    <li class="btn btn2">
+                        <a href="shop.html">All Booksue</a>
+                    </li>
+                    <li class="btn btn3 btn3a">
+                        <a href="single_product.html">Single product</a>
+                    </li>
+                    <li class="btn btn4">
+                        <a href="checkout.html">Checkout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--//breadcrumbs ends here-->
+    <!--checkout-->
+    <div class="innerf-pages section">
+        <div class="container">
+            <div class="privacy about" id="sold">
+                <h4 class="rad-txt">
+                    <span class="abtxt1">我的</span>
+                    <span class="abtext">卖出的</span>
+                </h4>
+
+                <div class="checkout-right">
+                    <h4>卖出有:
+                        <span>{{soldOrder.length}} 件商品</span>
+                    </h4>
+                    <table class="timetable_sub table-responsive">
+                        <thead>
+                        <tr>
+
+                            <th>订单号</th>
+                            <th>书籍编号</th>
+                            <th>书名</th>
+                            <th>数量</th>
+                            <th>买家</th>
+                            <th>创建时间</th>
+                            <th>查看联系方式</th>
+                            <th>联系买家</th>
+                            <th>我已发货</th>
+                            <th>买家确认收货</th>
+                            <th>订单状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="rem2" v-for="item in soldOrder">
+                            <td class="invert">{{item.id}}</td>
+                            <td class="invert">{{item.bookId}}</td>
+
+                            <td class="invert">{{item.bookName}}</td>
+                            <td class="invert">{{item.num}}</td>
+                            <td class="invert">{{item.buyerName}}</td>
+                            <td class="invert">{{item.createDate}}</td>
+                            <td class="invert">
+                                <button @click="checkPhone()" type="button" class="btn btn-xs">查看对方联系方式</button>
+                            </td>
+                            <td class="invert">
+                                <button class="btn btn-primary btn-xs" :disabled="item.contactBuyer==true?true:false"
+                                        @click="contactBuyer(item.id)">我已联系买家
+                                </button>
+                            </td>
+                            <td class="invert">
+                                <button class="btn btn-danger btn-xs" :disabled="item.sendOut==true?true:false"
+                                        @click="sendOut(item.id)">
+                                    我已发货
+                                </button>
+                            </td>
+                            <td class="invert">{{item.received == true ? '已收到' : '确认中'}}</td>
+                            <td class="invert">{{item.active == true ? '等待交易' : '已完成'}}</td>
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="checkout-left">
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+
+            <div class="privacy about" id="bought">
+                <h4 class="rad-txt">
+                    <span class="abtxt1">我的</span>
+                    <span class="abtext">买到的</span>
+                </h4>
+                <div class="checkout-right">
+                    <h4>买到有:
+                        <span>{{boughtOrders.length}} 件商品</span>
+                    </h4>
+                    <table class="timetable_sub table-responsive">
+                        <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>书籍编号</th>
+                            <th>书名</th>
+                            <th>数量</th>
+                            <th>卖家</th>
+                            <th>创建时间</th>
+                            <th>查看联系方式</th>
+                            <th>卖家联系</th>
+                            <th>卖家发货</th>
+                            <th>确认收货</th>
+                            <th>订单状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="rem2" v-for="item in boughtOrders">
+                            <td class="invert">{{item.id}}</td>
+                            <td class="invert">{{item.bookId}}</td>
+
+                            <td class="invert">{{item.bookName}}</td>
+                            <td class="invert">{{item.num}}</td>
+                            <td class="invert">{{item.sellerName}}</td>
+                            <td class="invert">{{item.createDate}}</td>
+                            <td class="invert">
+                                <button @click="checkPhone()" type="button" class="btn btn-xs">查看对方联系方式</button>
+                            </td>
+                            <td class="invert">
+                                {{item.contactBuyer ? '已联系' : '等待中'}}
+                            </td>
+                            <td class="invert">
+                                {{item.sendOut == true ? '已发货' : '等待中'}}
+                            </td>
+                            <td class="invert">
+                                <button class="btn btn-danger" :disabled="item.received==true?true:false"
+                                        @click="receive(item.id)">
+                                    确认收货
+                                </button>
+                            </td>
+                            <td class="invert">{{item.active == true ? '等待交易' : '已完成'}}</td>
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="checkout-left">
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--//checkout-->
+    <!-- footer -->
+    <div class="footer-bottom section">
+        <div class="container">
+
+            <!-- footer grids-->
+            <div class="footer-cpy">
+                <!-- footer-grid1 -->
+                <div class="col-md-3 col-sm-6 footer-logo">
+                    <h3>
+                        <a href="index.html">UsedBookStore</a>
+                    </h3>
+                    <h4>about us</h4>
+                    <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate
+                        Vesti.</p>
+                </div>
+                <!-- //footer-grid1 -->
+                <!-- footer-grid2 -->
+                <div class="col-md-3 col-sm-6 footer-nav text-center">
+                    <h4>navigation</h4>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About us</a>
+                        </li>
+                        <li>
+                            <a href="shop.html">shop</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">contact us</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //footer-grid2 -->
+                <!-- footer-grid3 -->
+                <div class="col-md-3 col-sm-6 blog-footer">
+                    <h4>latest from blog</h4>
+                    <div class="blog1">
+                        <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                            <a href="#">
+                                <img src="images/b1.jpg" alt="" class="img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                            <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                            <p>February 15, 2018</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="blog1">
+                        <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                            <a href="#">
+                                <img src="images/b2.jpg" alt="" class="img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                            <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                            <p>February 20, 2018</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- //footer-grid3 -->
+                <!-- footer-grid4 -->
+                <div class="col-md-3 col-sm-6 contact-foot text-right">
+                    <h4>contact us</h4>
+                    <ul>
+                        <li>
+                            <span class="fa fa-home"></span>
+                            1185 Burlington
+                            <br> Canada.
+                        </li>
+                        <li>
+                            <span class="fa fa-phone"></span>
+                            +12 345 678
+                        </li>
+                        <li>
+                            <span class="fa fa-envelope"></span>
+                            <a href="mailto:info@example.com">mail@UsedBookStore.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //footer-grid4 -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- //footer-grids -->
+        </div>
+        <!-- //footer container -->
+    </div>
+    <!-- //footer -->
+</div>
+<!-- //home -->
+
+<!-- Common js -->
+<script src="js/jquery-2.2.3.min.js"></script>
+<!--// Common js -->
+<!--    vue axios js-->
+<script type="text/javascript" src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script>
+    var sold = new Vue({
+        el: "#sold",
+        data: {
+            soldOrder: {}
+        },
+        methods: {
+            getUserInfo(){
+                var userString = localStorage.getItem("userInfo");
+                if (userString) {
+                    this.user = JSON.parse(userString)
+                    console.log(this.user)
+                } else {
+                    // alert("尚未登录，点击确定去登录")
+                    // location.href = "login.html"
+                }
+            },
+            querySoldOrders() {
+                //获取传参过来的 sellerId
+                // var start = location.href.lastIndexOf("=");
+                // var sellerId = location.href.substring(start + 1);
+                this.getUserInfo()
+
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/order/sold',
+                    params: {
+                        sellerId: this.user.id
+                    },
+                }).then(res => {
+                    console.log(res.data)
+                    if (res.data.state) {
+                        this.soldOrder = res.data.soldOrders
+                    }
+                })
+            },
+            contactBuyer(orderId) {
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/order/contactBuyer',
+                    params: {
+                        orderId: orderId,
+                        contactBuyer: true
+                    }
+                }).then(res => {
+                    if (res.data.state) {
+                        alert("确认成功！")
+                        this.querySoldOrders()
+                    }
+                })
+            },
+
+            sendOut(orderId) {
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/order/sendOut',
+                    params: {
+                        orderId: orderId,
+                        sendOut: true
+                    }
+                }).then(res => {
+                    alert("您已确认发货，等待买家确认，完成交易")
+                    this.querySoldOrders();
+                })
+            },
+            checkPhone() {
+                alert("对方电话是：13272983401")
+            }
+        },
+
+        created() {
+            this.querySoldOrders()
+        }
+    })
+
+    var bought = new Vue({
+        el: "#bought",
+        data: {
+            boughtOrders: {},
+            user:{}
+        },
+        methods: {
+            getUserInfo(){
+                var userString = localStorage.getItem("userInfo");
+                if (userString) {
+                    this.user = JSON.parse(userString)
+                    // console.log(this.user)
+                } else {
+                    alert("尚未登录，点击确定去登录")
+                    location.href = "login.html"
+                }
+            },
+            queryBoughtOrders() {
+                // 获取传参过来的 buyerId
+                // var start = location.href.lastIndexOf("=");
+                // var buyerId = location.href.substring(start + 1);
+                this.getUserInfo()
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/order/bought',
+                    params: {
+                        buyerId: this.user.id
+                    },
+                }).then(res => {
+                    // console.log(res.data)
+                    if (res.data.state) {
+                        this.boughtOrders = res.data.boughtOrders
+                        // alert(JSON.stringify(this.boughtOrders))
+                        console.log(this.boughtOrders)
+                    }
+                })
+            },
+            checkPhone() {
+                alert("对方电话是：xxx-xxxxxxxxx")
+            },
+            receive(orderId) {
+                alert("您已点击确认收货，本单交易已结束")
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/order/receive',
+                    params: {
+                        orderId: orderId,
+                        received: true
+                    }
+                }).then(res => {
+                    console.log(res.data)
+                    if (res.data.state) {
+                        this.queryBoughtOrders()
+                    }
+                })
+            },
+        },
+
+        created() {
+            this.queryBoughtOrders()
+        }
+    })
+
+
+    var app = new Vue({
+        el: "#bar",
+        data: {
+            user: {},
+            log:false
+        },
+        methods: {},
+        created() {
+            var userString = localStorage.getItem("userInfo");
+            if (userString) {
+                this.user = JSON.parse(userString)
+                this.log = true;
+            } else {
+                this.log = false;
+                alert("尚未登录，点击确定去登录")
+            }
+        }
+    })
+</script>
+
+<!-- cart-js -->
+<script src="js/minicart.js"></script>
+<script>
+    chr.render();
+
+    chr.cart.on('new_checkout', function (evt) {
+        var items, len, i;
+
+        if (this.subtotal() > 0) {
+            items = this.items();
+
+            for (i = 0, len = items.length; i < len; i++) {
+            }
+        }
+    });
+</script>
+<!-- //cart-js -->
+<!--quantity-->
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1) divUpd.text(newVal);
+    });
+</script>
+<!--quantity-->
+<!-- FadeOut-Script -->
+<script>
+    $(document).ready(function (c) {
+        $('.close1').on('click', function (c) {
+            $('.rem1').fadeOut('slow', function (c) {
+                $('.rem1').remove();
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function (c) {
+        $('.close2').on('click', function (c) {
+            $('.rem2').fadeOut('slow', function (c) {
+                $('.rem2').remove();
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function (c) {
+        $('.close3').on('click', function (c) {
+            $('.rem3').fadeOut('slow', function (c) {
+                $('.rem3').remove();
+            });
+        });
+    });
+</script>
+<!--// FadeOut-Script -->
+
+<!-- dropdown nav -->
+<script>
+    $(document).ready(function () {
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function () {
+                $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
+<!-- //dropdown nav -->
+<!--search jQuery-->
+<script src="js/main.js"></script>
+<!--search jQuery-->
+
+<!-- Scrolling Nav JavaScript -->
+<script src="js/scrolling-nav.js"></script>
+<!-- //fixed-scroll-nav-js -->
+<!--//scripts-->
+<!-- start-smooth-scrolling -->
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script>
+    $(document).ready(function () {
+        /*
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<script src="js/SmoothScroll.min.js"></script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/bootstrap.js"></script>
+</body>
+
+</html>

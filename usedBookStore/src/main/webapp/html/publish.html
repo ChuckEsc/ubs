@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Publish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <!-- shop css -->
+    <link href="css/shop.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/cart.css" type="text/css" rel="stylesheet" media="all">
+    <!-- easy-responsive-tabs css -->
+    <link rel="stylesheet" href="css/easy-responsive-tabs.css" type="text/css" media="all"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <!-- logo -->
+    <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+    <!-- titles -->
+    <link href="http://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i"
+          rel="stylesheet">
+    <!-- body -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+          rel="stylesheet">
+    <!-- //online-fonts -->
+</head>
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<div id="home">
+    <!-- header -->
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="main-nav">
+            <div class="container">
+
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">UsedBookStore</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1>
+                        <a class="navbar-brand" href="index.html">UsedBookStore</a>
+                    </h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse nav-right">
+                    <ul class="nav navbar-nav navbar-left cl-effect-15">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a class="page-scroll" href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">书城
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="shop.html">所有书</a>
+                                </li>
+                                <li>
+                                    <a href="checkout.html">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="publish.html">我要发布</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">详情
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a :href="'orders.html?id='+user.id">订单</a></li>
+                                <li>
+                                    <a href="my_house.html">我的书</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">账号
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="edit.html">编辑资料</a></li>
+                                <li>
+                                    <a href="admin.html">管理员</a>
+                                </li>
+                                <li>
+                                    <a href="#" @click="logout()">退出</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html" title="SignIn & SignUp" v-if="user==null">
+                                <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                            </a>
+                            <a href="edit.html" title="SignIn & SignUp" v-else>
+                                <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- shopping cart -->
+                    <div class="cart-mainf">
+                        <div class="chrcart chrcart2 cart cart box_1">
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+                                <a href="login.html" v-if="user==null">
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                </a>
+                                <a href="checkout.html" v-else>
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //shopping cart ends here -->
+                </div>
+                <!-- /.navbar-collapse -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.container -->
+        </div>
+    </nav>
+    <!-- //navbar ends here -->
+    <!-- breadcrumbs -->
+    <div class="crumbs text-center">
+        <div class="container">
+            <div class="row">
+                <ul class="btn-group btn-breadcrumb bc-list">
+                    <li class="btn btn1">
+                        <a href="index.html">
+                            <i class="glyphicon glyphicon-home"></i>
+                        </a>
+                    </li>
+                    <li class="btn btn2">
+                        <a href="shop.html">All Booksue</a>
+                    </li>
+                    <li class="btn btn3 btn3a">
+                        <a href="single_product.html">Single product</a>
+                    </li>
+                    <li class="btn btn4 btn4a">
+                        <a href="checkout.html">Checkout</a>
+                    </li>
+                    <li class="btn btn5">
+                        <a href="publish.html">Publish Details</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--//breadcrumbs ends here-->
+    <!--Publish-->
+    <div class="innerf-pages section">
+        <div class="container">
+            <div class="privacy about">
+                <h4 class="rad-txt">
+                    <span class="abtxt1">我的书籍</span>
+                    <span class="abtext">发布新书</span>
+                </h4>
+                <!--/tabs-->
+                <div class="responsive_tabs innfpage-tabs">
+                    <div id="horizontalTab">
+                        <ul class="resp-tabs-list">
+                            <!--								<li>Cash on delivery (COD)</li>-->
+                            <!--								<li>Credit/Debit</li>-->
+                            <!--								<li>Net Banking</li>-->
+                            <!--								<li>Paypal Account</li>-->
+                        </ul>
+                        <div class="resp-tabs-container">
+
+                            <!--//tab_one-->
+                            <div class="tab2" id="tab2">
+                                <div class="pay_info">
+                                    <form action="#" method="post" class="creditly-card-form shopf-sear-headinfo_form">
+                                        <section class="creditly-wrapper payf_wrapper">
+                                            <div class="credit-card-wrapper">
+                                                <div class="first-row form-group">
+                                                    <div class="controls">
+                                                        <label class="control-label">书名</label>
+                                                        <input v-model="book.name"
+                                                               class="billing-address-name form-control" type="text"
+                                                               name="name" placeholder="the name of the book">
+                                                    </div>
+                                                    <div class="paymntf_card_number_grids">
+                                                        <div class="fpay_card_number_grid_left">
+                                                            <div class="controls">
+                                                                <label class="control-label">价格</label>
+                                                                <input v-model="book.price"
+                                                                       class="billing-address-name form-control" type="text"
+                                                                       name="name" placeholder="the price of the book">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="fpay_card_number_grid_right">
+                                                            <div class="controls">
+                                                                <label class="control-label">作者</label>
+                                                                <input v-model="book.author"
+                                                                       class="billing-address-name form-control" type="text"
+                                                                       name="name" placeholder="the author of the book">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="fpay_card_number_grid_right">
+                                                            <div class="controls">
+                                                                <label class="control-label">类型描述</label>
+                                                                <input v-model="book.type_"
+                                                                       class="billing-address-name form-control" type="text"
+                                                                       name="name" placeholder="the type of the book">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="fpay_card_number_grid_right">
+                                                            <div class="controls">
+                                                                <label class="control-label">上传封面</label>
+                                                                <input type="file" id="pic" ref="covers"
+                                                                       class="security-code form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="fpay_card_number_grid_right">
+                                                            <div class="controls">
+                                                                <label class="control-label">书籍概述</label>
+                                                                <input v-model="book.describes"
+                                                                       class="billing-address-name form-control"
+                                                                       type="text"
+                                                                       name="name"
+                                                                       placeholder="the describes of the book">
+                                                            </div>
+                                                        </div>
+
+                                                        <label class="control-label">库存</label>
+                                                        <div class="controls">
+                                                            <div class="section_room_pay">
+
+                                                                <select v-model="book.storage" class="year"
+                                                                        style="width: 33%;height: 42px;color: #555;font-size: 14px;padding-left: 10px;border: 1px solid #ccc">
+                                                                    <option v-for="n in 8" :value="n"
+                                                                            class="form-control">{{n}} 本
+                                                                    </option>
+                                                                </select>
+
+                                                            </div>
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                        <div class="clear"></div>
+
+                                                        <div class="controls">
+                                                            <label class="control-label">现在出售？</label>
+                                                            <div class="radio_one">
+                                                                <label>
+                                                                    <input type="radio" v-model="book.saleNow" value="1"
+                                                                           name="radio">
+                                                                    <i></i>现在出售</label>
+                                                                <label>
+                                                                    <input type="radio" v-model="book.saleNow" value="0"
+                                                                           name="radio">
+                                                                    <i></i>暂不出售</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="controls">
+                                                            <label class="control-label">购入日期</label>
+                                                            <input v-model="book.buyDate"
+                                                                   class="expiration-month-and-year form-control"
+                                                                   type="date" name="expiration-month-and-year"
+                                                                   placeholder="MM / YY">
+                                                        </div>
+                                                    </div>
+                                                    <button @click="publish()" class="submit" type="button">
+                                                        <span>立即发布 </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--//tabs-->
+                </div>
+
+            </div>
+        </div>
+        <!-- //Publish -->
+        <!-- footer -->
+        <div class="footer-bottom section">
+            <div class="container">
+                <!-- footer grids-->
+                <div class="footer-cpy">
+                    <!-- footer-grid1 -->
+                    <div class="col-md-3 col-sm-6 footer-logo">
+                        <h3>
+                            <a href="index.html">UsedBookStore</a>
+                        </h3>
+                        <h4>about us</h4>
+                        <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate
+                            Vesti.</p>
+                    </div>
+                    <!-- //footer-grid1 -->
+                    <!-- footer-grid2 -->
+                    <div class="col-md-3 col-sm-6 footer-nav text-center">
+                        <h4>navigation</h4>
+                        <ul>
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About us</a>
+                            </li>
+                            <li>
+                                <a href="shop.html">shop</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- //footer-grid2 -->
+                    <!-- footer-grid3 -->
+                    <div class="col-md-3 col-sm-6 blog-footer">
+                        <h4>latest from blog</h4>
+                        <div class="blog1">
+                            <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                                <a href="#">
+                                    <img src="images/b1.jpg" alt="" class="img-responsive"/>
+                                </a>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                                <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                                <p>February 15, 2018</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="blog1">
+                            <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                                <a href="#">
+                                    <img src="images/b2.jpg" alt="" class="img-responsive"/>
+                                </a>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                                <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                                <p>February 20, 2018</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!-- //footer-grid3 -->
+                    <!-- footer-grid4 -->
+                    <div class="col-md-3 col-sm-6 contact-foot text-right">
+                        <h4>contact us</h4>
+                        <ul>
+                            <li>
+                                <span class="fa fa-home"></span>
+                                1185 Burlington
+                                <br> Canada.
+                            </li>
+                            <li>
+                                <span class="fa fa-phone"></span>
+                                +12 345 678
+                            </li>
+                            <li>
+                                <span class="fa fa-envelope"></span>
+                                <a href="mailto:info@example.com">mail@UsedBookStore.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- //footer-grid4 -->
+                    <div class="clearfix"></div>
+                </div>
+                <!-- //footer-grids -->
+                <!-- footer social -->
+
+                <!-- //footer social -->
+            </div>
+            <!-- //footer container -->
+        </div>
+        <!-- //footer -->
+        <div class="cpy-right">
+            <p></p>
+        </div>
+    </div>
+    <!-- //home -->
+</div>
+    <!-- Common js -->
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <!--// Common js -->
+
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script>
+        var reg = /^\d+(\.\d+)?$/;
+        var app = new Vue({
+            el: "#home",
+            data: {
+                user: {},
+                book: {}
+            },
+            methods: {
+                publish() {
+                    console.log(this.book);
+                    // console.log(this.$refs.covers.files[0]);
+                    if (this.$refs.covers.files[0] == null) {
+                        alert("请选择书籍封面！")
+                    } else if (this.book.buyDate == null) {
+                        alert("请选择购入日期！")
+                    } else if (this.book.name == null) {
+                        alert("请正确填写书名!")
+                    } else if (this.book.storage === undefined) {
+                        alert("请正确填写库存！")
+                    } else if (this.book.describes == null) {
+                        alert("请正确填写书籍描述！")
+                    } else if (!reg.test(this.book.price)) {
+                        alert("请正确填写出售价格！")
+                    } else if (this.book.type_ == null) {
+                        alert("请正确填写类型！")
+                    } else if (this.book.author == null) {
+                        alert("请正确填写书籍作者！")
+                    } else if (this.book.saleNow == null) {
+                        alert("请正确填写是否现在出售！")
+                    } else {
+                        var formData = new FormData();
+                        formData.append("userId", this.user.id)
+                        formData.append("name", this.book.name);
+                        formData.append("storage", this.book.storage)
+                        formData.append("price", this.book.price)
+                        formData.append("describes", this.book.describes)
+                        formData.append("type_", this.book.type_)
+                        formData.append("buyDate", this.book.buyDate)
+                        formData.append("author", this.book.author)
+                        formData.append("saleNow", this.book.saleNow)
+                        formData.append("covers", this.$refs.covers.files[0])
+                        axios({
+                            method: 'post',
+                            url: 'http://localhost:8083/book/publish',
+                            data: formData,
+                            headers: {
+                                'content-type': 'multipart/form-data'
+                            }
+                        }).then(res => {
+                            console.log(res.data.msg)
+                            if (res.data.state) {
+                                if (window.confirm(res.data.msg + ",点击确定跳转到主页")) {
+                                    location.href = "index.html"
+                                } else {
+
+                                }
+                            } else {
+                                alert(res.data.msg)
+                                location.href = "index.html"
+                            }
+                        })
+                        console.log(formData.get("userId"))
+                    }
+
+
+                },
+                logout() {
+                    if (window.confirm("确认要退出此账号？")){
+                        localStorage.removeItem("userInfo")
+                        alert("当前还没有用户登录，点击确定去登录")
+                        location.href = "login.html"
+                    }
+                },
+            },
+            created() {
+                var userString = localStorage.getItem("userInfo");
+                if (userString) {
+                    this.user = JSON.parse(userString)
+                } else {
+                    alert("尚未登录，点击确定去登录")
+                    location.href = "login.html"
+                }
+                console.log(this.user)
+            }
+        })
+    </script>
+
+    <!-- cart-js -->
+    <script src="js/minicart.js"></script>
+    <script>
+        chr.render();
+
+        chr.cart.on('new_checkout', function (evt) {
+            var items, len, i;
+
+            if (this.subtotal() > 0) {
+                items = this.items();
+
+                for (i = 0, len = items.length; i < len; i++) {
+                }
+            }
+        });
+    </script>
+    <!-- //cart-js -->
+
+    <!-- easy-responsive-tabs -->
+    <script src="js/easy-responsive-tabs.js"></script>
+    <script>
+        /*$(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+        });*/
+    </script>
+
+    <!-- //easy-responsive-tabs -->
+
+    <!-- credit-card -->
+    <script src="js/creditly.js"></script>
+    <link rel="stylesheet" href="css/creditly.css" type="text/css" media="all"/>
+
+    <script>
+        $(function () {
+            var creditly = Creditly.initialize(
+                '.creditly-wrapper .expiration-month-and-year',
+                '.creditly-wrapper .credit-card-number',
+                '.creditly-wrapper .security-code',
+                '.creditly-wrapper .card-type');
+
+            $(".creditly-card-form .submit").click(function (e) {
+                e.preventDefault();
+                var output = creditly.validate();
+                if (output) {
+                    // Your validated credit card output
+                    console.log(output);
+                }
+            });
+        });
+    </script>
+    <!-- //credit-card -->
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="js/scrolling-nav.js"></script>
+    <!-- //fixed-scroll-nav-js -->
+    <!--//scripts-->
+    <!-- //gallery-js  -->
+    <!-- start-smooth-scrolling -->
+    <script src="js/move-top.js"></script>
+    <script src="js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function () {
+            /*
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+            */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <script src="js/SmoothScroll.min.js"></script>
+    <!-- //smooth-scrolling-of-move-up -->
+    <!-- Bootstrap core JavaScript
+     ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.OrderDao">
+    <select id="findOrderByBuyerId" resultType="order" parameterType="int">
+    select * from orders where buyerId = #{buyerId}
+  </select>
+
+    <select id="findOrderBySellerId" parameterType="int" resultType="order">
+        select * from orders where sellerId = #{sellerId}
+    </select>
+
+    <insert id="addOrder" parameterType="order">
+        insert into orders (bookId,bookName,buyerId,buyerName,sellerId,sellerName,active,contactBuyer,received,sendOut,createDate)
+         values(#{bookId},#{bookName},#{buyerId},#{buyerName},#{sellerId},#{sellerName},#{active},#{contactBuyer},#{received},#{sendOut},#{createDate})
+    </insert>
+
+    <update id="contactBuyer" >
+        update orders set contactBuyer = #{contactBuyer} where id = #{id}
+    </update>
+
+    <update id="receive">
+        update orders set received = #{received} , active = false  where id = #{id}
+    </update>
+
+    <update id="sendOut" >
+        update orders set sendOut = #{sendOut} where id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="int" resultType="order">
+        select * from orders where id = #{orderId}
+    </select>
+
+    <select id="getAll" resultType="order">
+        select * from orders
+    </select>
+
+    <delete id="deleteById" parameterType="int">
+        delete from orders where id = #{orderId}
+    </delete>
+</mapper>

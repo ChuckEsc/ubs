@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.BookDao">
+
+    <!--    //LruCache(内存缓存)的原理-->
+    <cache eviction="LRU" type="com.baizhi.cache.RedisCache"/>
+    <!--    添加新书-->
+    <insert id="addBook" parameterType="book">
+        insert into books(name,storage,describes,buyDate,price,type_,userId,pic,saleNow,author)
+            values (#{name},#{storage},#{describes},#{buyDate},#{price} ,#{type_} ,#{userId} ,#{pic},#{saleNow},#{author})
+    </insert>
+
+    <sql id="paginFiled">
+
+    </sql>
+
+    <!--    查询所有书-->
+    <select id="findAll" resultType="book" useCache="false">
+        select * from books
+        <if test="offset != null and limit != null">
+            limit #{offset},#{limit}
+        </if>
+        <if test="offset == null and limit != null">
+            limit #{limit}
+        </if>
+    </select>
+
+    <!--    根据用户id查询自己发布的书籍-->
+    <select id="findByUser" resultType="book" parameterType="int">
+        select * from books where userId = #{userId}
+    </select>
+
+    <select id="findById" parameterType="int" resultType="book">
+        select * from books where id = #{id}
+    </select>
+
+    <select id="findTotalsOnSale" resultType="int">
+        select count(id) from books
+        <where>
+            userId = #{userId}
+            <if test="saleNow != null and saleNow==true">
+                and saleNow = true
+            </if>
+
+            <if test="content !=null and content != ''">
+                and name like '%${content}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="findByUId" parameterType="int" resultType="book">
+        select * from books
+        <where>
+            userId = #{userId}
+            <if test="saleNow != null and saleNow==true">
+                and saleNow = true
+            </if>
+            <if test="saleNow != null and saleNow==false">
+                and saleNow = false
+            </if>
+            <if test="content !=null and content != ''">
+                and name like '%${content}%'
+            </if>
+        </where>
+        <if test="pageParams.offset != null and pageParams.limit != null">
+            limit #{pageParams.offset},#{pageParams.limit}
+        </if>
+        <if test="pageParams.offset == null and pageParams.limit != null">
+            limit #{pageParams.limit}
+        </if>
+    </select>
+
+    <update id="updateBook" parameterType="book">
+        update books set name = #{name},price = #{price} ,storage = #{storage},
+            describes = #{describes},type_=#{type_},userId = #{userId},
+            saleNow = #{saleNow},author = #{author}
+            where id = #{id}
+    </update>
+
+
+    <update id="updateStorage" parameterType="int">
+        update books set storage = storage - #{orderNum} where id = #{bookId}
+    </update>
+
+    <select id="getBookList" resultType="book">
+        select * from books
+        <where>
+            saleNow = 1
+            <if test="content !=null and content != ''">
+                and name like '%${content}%'
+            </if>
+        </where>
+        <if test="pageParams.offset != null and pageParams.limit != null">
+            limit #{pageParams.offset},#{pageParams.limit}
+        </if>
+        <if test="pageParams.offset == null and pageParams.limit != null">
+            limit #{pageParams.limit}
+        </if>
+    </select>
+
+    <select id="findTotals" resultType="int" useCache="false">
+        select count(id) from books where saleNow = 1;
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from books where id = #{id}
+    </delete>
+
+    <select id="findALlSaleNow" resultType="book">
+        select * from books
+        <where>
+            <if test="">
+
+            </if>
+        </where>
+    </select>
+
+    <select id="findTotalsByAdmin" resultType="int">
+        select count(id) from books
+    </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.CartDao">
+
+    <!--    开启二级缓存-->
+    <!--
+    eviction LRU – 最近最少使用的:移除最长时间不被使用的对象。
+    flushInterval缓存时间，以毫秒为单位
+    size缓存大小
+    readOnly如果为false的话，缓存对象必须是可序列化的-->
+<!--    <cache eviction="LRU" type="com.baizhi.cache.RedisCache"/>-->
+
+    <select id="findAll" resultType="cart" parameterType="int">
+        select * from carts where buyerId = #{buyerId}
+    </select>
+
+    <insert id="insertCart" parameterType="cart">
+        insert into carts (buyerId,ownerId,bookId,bookName,smallImg,price,num) values
+        (#{buyerId},#{ownerId},#{bookId},#{bookName},#{smallImg},#{price},#{num})  ON DUPLICATE KEY UPDATE num = num+1
+    </insert>
+
+    <update id="plusOne" parameterType="int">
+        update carts set num = num+1 where id = #{cartId}
+    </update>
+
+    <update id="minusOne" parameterType="int">
+        update carts set num = num-1 where id = #{cartId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete  from carts where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="int" resultType="cart">
+        select * from carts where id = #{id}
+    </select>
+</mapper>

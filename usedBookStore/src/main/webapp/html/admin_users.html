@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员-用户管理</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <script src="../bootstrap-3.3.7-dist/js/jquery-3.4.1.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+<body>
+
+
+<div class="panel">
+    <div class="panel-body">
+        <div id="app" class="col-md-offset-1 col-md-10">
+
+            <nav class="navbar navbar-inverse">
+                <ul class="nav navbar-nav">
+                    <li role="presentation"><a href="admin.html">发布公告 </a></li>
+                    <li role="presentation" class="active"><a href="admin_users.html">用户管理</a></li>
+                    <li role="presentation"><a href="admin_books.html">图书管理</a></li>
+                    <li role="presentation"><a href="admin_orders.html">订单管理</a></li>
+                    <li role="presentation"><a href="index.html">书籍商城</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <p class="navbar-text">当前管理员： {{adminInfo.name}} </p>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">账户 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li @click="logout"><a href="#">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div>
+                <h2 class="text-center">用户管理</h2>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>id</th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>电话</th>
+                        <th>性别</th>
+                        <th>头像</th>
+                        <th>真实姓名</th>
+                        <th>编辑</th>
+                    </tr>
+                    <tr v-for="item in userList">
+                        <td>{{item.id}}</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.password}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.gender}}</td>
+                        <td><img :src="'http://localhost:8083/static/files/'+item.profile" alt="" class="img-responsive" width="50"></td>
+                        <td>{{item.realName}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-xs" @click="deleteUser(item.id)" style="border-radius: 0">删除</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <h2 class="text-center"><small>you just a sad song and nothing to say</small></h2>
+        <table class="table  text-center">
+            <tr>
+                <td>版权所有</td>
+                <td>联系人</td>
+            </tr>
+            <tr>
+                <td>usedBookStore@copyright</td>
+                <td><a href="#">223338324@qq.com</a></td>
+            </tr>
+        </table>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/vue.js"></script>
+<script src="../bootstrap-3.3.7-dist/js/axios.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            adminInfo: {},
+            userList: {}
+        },
+        methods: {
+            getUsers() {
+                //获取用户列表
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8083/user/all',
+                    params: {}
+                }).then(res => {
+                    console.log(res.data)
+                    this.userList = res.data
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            //删除用户
+            deleteUser(id) {
+                if (window.confirm("确定要删除该用户吗？")) {
+                    axios({
+                        method: 'get',
+                        url: 'http://localhost:8083/user/delete',
+                        params: {id: id}
+                    }).then(res => {
+                        alert(res.data.msg)
+                        this.getUsers();
+                    })
+                }
+            },
+            logout() {
+                if (window.confirm("确认要退出此账号？")){
+                    localStorage.removeItem("adminInfo")
+                    alert("当前还没有用户登录，点击确定去登录")
+                    location.href = "admin_login.html"
+                }
+            },
+        },
+        created() {
+            //获取当前管理员信息，初步拦截
+            axios({
+                method: 'get',
+                url: 'http://localhost:8083/admin/info',
+                params: {}
+            }).then(res => {
+                console.log(res.data)
+                if (res.data.status) {
+                    this.adminInfo = res.data.adminInfo;
+                } else {
+                    alert(res.data.msg)
+                    //如果没有session，则没有登录，跳转到登录页
+                    location.href = 'admin_login.html';
+                }
+            }).catch(err => {
+                console.log(err)
+                alert("request failed!")
+            })
+            this.getUsers();
+        }
+    })
+</script>

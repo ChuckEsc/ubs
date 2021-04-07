@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>我的资料</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <!-- shop css -->
+    <link href="css/shop.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <!-- logo -->
+    <link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+    <!-- titles -->
+    <link href="http://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+    <!-- body -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <!-- //online-fonts -->
+</head>
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <div id="home">
+        <!-- header -->
+        <!-- navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="main-nav">
+                <div class="container">
+
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">UsedBookStore</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1>
+                            <a class="navbar-brand" href="index.html">usedBookStore</a>
+                        </h1>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse nav-right">
+                        <ul class="nav navbar-nav navbar-left cl-effect-15">
+                            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                            <li class="hidden">
+                                <a class="page-scroll" href="#page-top"></a>
+                            </li>
+                            <li>
+                                <a href="index.html">首页</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">书城
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="shop.html">所有书</a>
+                                    </li>
+                                    <li>
+                                        <a href="checkout.html">购物车</a>
+                                    </li>
+									<li>
+                                        <a href="publish.html">我要发布</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">详情
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a :href="'orders.html?id='+user.id">订单</a></li>
+                                    <li>
+                                        <a href="my_house.html">我的书</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">账号
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="edit.html">编辑资料</a></li>
+                                    <li>
+                                        <a href="admin.html">管理员</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" @click="logout()">退出</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="login.html" title="SignIn & SignUp" v-if="user==null">
+                                    <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                                </a>
+                                <a href="edit.html" title="SignIn & SignUp" v-else>
+                                    <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!-- shopping cart -->
+                        <div class="cart-mainf">
+                            <div class="chrcart chrcart2 cart cart box_1">
+                                <form action="#" method="post" class="last">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="display" value="1">
+                                    <a href="login.html" v-if="user==null">
+                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="checkout.html" v-else>
+                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- //shopping cart ends here -->
+                    </div>
+                    <!-- /.navbar-collapse -->
+                    <div class="clearfix"></div>
+                </div>
+                <!-- /.container -->
+            </div>
+        </nav>
+        <!-- //navbar ends here -->
+        <!-- breadcrumbs -->
+        <div class="crumbs text-center">
+            <div class="container">
+                <div class="row">
+                    <ul class="btn-group btn-breadcrumb bc-list">
+                        <li class="btn btn1">
+                            <a href="index.html">
+                                <i class="glyphicon glyphicon-home"></i>
+                            </a>
+                        </li>
+                        <li class="btn btn2">
+                            <a href="login.html">sign in & sign up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--//breadcrumbs ends here-->
+        <!-- signin and signup form -->
+        <div class="login-form section text-center">
+            <div class="container">
+                <h4 class="rad-txt">
+                    <span class="abtxt1">我的资料</span>
+                    <span class="abtext">编辑</span>
+                </h4>
+
+                <div id="signupbox" style="margin-top:50px" class="mainbox loginbox">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign Up</div>
+                        </div>
+                        <div class="panel-body">
+                            <form id="signupform" class="form-horizontal" action="#" method="post">
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Profile</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <img :src="'http://localhost:8083/static/files/'+user.profile" class="img-responsive img-thumbnail" style="width: 120px;" alt="">
+                                        <input type="file" style="margin:20px 0" ref="photo">
+
+                                    </div>
+
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Username</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="text" v-model="user.username" disabled  class="form-control" name="email" placeholder="Email Address" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Real Name</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input :disabled="user.realName==null?false:true" type="text" v-model="user.realName"class="form-control" name="firstname" placeholder="First Name" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Phone</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="text" v-model="user.phone" class="form-control" name="lastname" placeholder="Last Name" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Gender</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <div class="radio_one">
+                                            <label>
+                                                <input type="radio" v-model="user.gender" value="男"
+                                                       name="radio" :checked="user.gender=='男'?true:false">
+                                                <i></i>Male</label>
+                                            <label>
+                                                <input type="radio" v-model="user.gender" value="女"
+                                                       name="radio" :checked="user.gender=='女'?true:false">
+                                                <i></i>Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="signup-btn">
+                                        <button id="btn-signup" type="button" class="btn btn-info" @click="save()">
+                                            <i class="icon-hand-right"></i> &nbsp; 编辑</button>
+                                    </div>
+                                </div>
+                                <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+
+                                    <div class="f-btn">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-body">
+                            <form id="changePwdForm" class="form-horizontal" action="#" method="post">
+                                <div id="changePwd" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">旧密码</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="password" v-model="pwdInfo.oldPwd"   class="form-control" name="oldPwd" placeholder="former password" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">新密码</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input  type="password" v-model="pwdInfo.newPwd"class="form-control" name="newPwd" placeholder="new password" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 col-xs-3 control-label">确认密码</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="password" v-model="pwdInfo.confirmPwd" class="form-control" name="lastname" placeholder="confirm password" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="signup-btn">
+                                        <button  type="button" class="btn btn-info" @click="changePassword()">
+                                            <i class="icon-hand-right"></i> &nbsp; 保存</button>
+                                    </div>
+                                </div>
+                                <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+
+                                    <div class="f-btn">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//signin and signup form ends here-->
+     <!-- footer -->
+     <div class="footer-bottom section">
+        <div class="container">
+
+            <!-- footer grids-->
+            <div class="footer-cpy">
+                <!-- footer-grid1 -->
+                <div class="col-md-3 col-sm-6 footer-logo">
+                    <h3>
+                        <a href="index.html">usedBookStore</a>
+                    </h3>
+                    <h4>about us</h4>
+                    <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
+                </div>
+                <!-- //footer-grid1 -->
+                <!-- footer-grid2 -->
+                <div class="col-md-3 col-sm-6 footer-nav text-center">
+                    <h4>navigation</h4>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="shop.html">shop</a>
+                        </li>
+                        <li>
+                            <a href="">contact us</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //footer-grid2 -->
+                <!-- footer-grid3 -->
+                <div class="col-md-3 col-sm-6 blog-footer">
+                    <h4>latest from blog</h4>
+                    <div class="blog1">
+                        <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                            <a href="#">
+                                <img src="images/b1.jpg" alt="" class="img-responsive" />
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                            <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                            <p>February 15, 2018</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="blog1">
+                        <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                            <a href="#">
+                                <img src="images/b2.jpg" alt="" class="img-responsive" />
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                            <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                            <p>February 20, 2018</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- //footer-grid3 -->
+                <!-- footer-grid4 -->
+                <div class="col-md-3 col-sm-6 contact-foot text-right">
+                    <h4>contact us</h4>
+                    <ul>
+                        <li>
+                            <span class="fa fa-home"></span>
+                            1185 Burlington
+                            <br> Canada.
+                        </li>
+                        <li>
+                            <span class="fa fa-phone"></span>
+                            +12 345 678
+                        </li>
+                        <li>
+                            <span class="fa fa-envelope"></span>
+                            <a href="mailto:info@example.com">mail@UsedBookStore.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //footer-grid4 -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- //footer-grids -->
+            <!-- footer social -->
+            <div class="footer-social text-center">
+                <h4>stay connected</h4>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="fa fa-facebook icon_facebook"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="fa fa-twitter icon_twitter"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="fa fa-dribbble icon_dribbble"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="fa fa-google-plus icon_g_plus"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- //footer social -->
+        </div>
+        <!-- //footer container -->
+    </div>
+    <!-- //footer -->
+
+<!-- //home -->
+    <!-- js -->
+    <script src="./js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+    <!-- cart-js -->
+    <script src="js/minicart.js"></script>
+    <script>
+        chr.render();
+
+        chr.cart.on('new_checkout', function (evt) {
+            var items, len, i;
+
+            if (this.subtotal() > 0) {
+                items = this.items();
+
+                for (i = 0, len = items.length; i < len; i++) {}
+            }
+        });
+    </script>
+    <!-- //cart-js -->
+
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="js/scrolling-nav.js"></script>
+    <!-- //fixed-scroll-nav-js -->
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#home",
+            data: {
+                profile: '',
+                user: {}, //用来存放用户登录信息
+                pwdInfo:{}
+            },
+            methods: {
+                logout() {
+                    if (window.confirm("确认要退出此账号？")){
+                        localStorage.removeItem("userInfo")
+                        alert("当前还没有用户登录，点击确定去登录")
+                        location.href = "login.html"
+                    }
+                },
+                save() {
+                    console.log(this.user)
+                    var formData = new FormData();
+                    formData.append("id", this.user.id)
+                    formData.append("username", this.user.username)
+                    formData.append("password", this.user.password)
+                    formData.append("phone", this.user.phone)
+                    formData.append("gender", this.user.gender)
+                    formData.append("realName", this.user.realName)
+                    formData.append("photo", this.$refs.photo.files[0])
+                    formData.append("profile", this.user.profile)
+                    console.log(this.$refs.photo.files[0])
+                    var that = this
+                    axios({
+                        method: 'post',
+                        url: 'http://localhost:8083/user/update',
+                        data: formData,
+                        headers: {
+                            'content-type': 'multipart/form-data'
+                        }
+                    }).then(res => {
+                        console.log(res.data)
+                        if (res.data.state) {
+                            if (window.confirm(res.data.msg )) {
+                                location.href = "edit.html"
+                                localStorage.removeItem("userInfo")
+                                localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo))
+                            } else {
+                                that.user = {};
+                            }
+                        } else {
+                            alert(res.data.msg)
+                        }
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                },
+                changePassword(){
+                    if (this.pwdInfo.newPwd==null || this.pwdInfo.confirmPwd== null){
+                        alert("密码不能为空！")
+                    }else {
+                        axios({
+                            method: 'get',
+                            url: 'http://localhost:8083/user/changePwd',
+                            params:{
+                                userId:this.user.id,
+                                oldPwd:this.pwdInfo.oldPwd,
+                                newPwd:this.pwdInfo.newPwd,
+                                confirmPwd:this.pwdInfo.confirmPwd
+                            }
+                        }).then(res=>{
+                            if (res.data.status){
+                                // window.confirm(res.data.msg,",点击确定去登录")
+                                alert(res.data.msg)
+                                location.href = 'edit.html'
+                            }else {
+                                alert(res.data.msg)
+                            }
+                        })
+                    }
+
+                }
+            },
+            created() {
+                var userString = localStorage.getItem("userInfo");
+                if (userString) {
+                    this.user = JSON.parse(userString)
+                } else {
+                    alert("尚未登录，点击确定去登录")
+                    // location.href = "logIn.html"
+                }
+                console.log(userString)
+            }
+        })
+    </script>
+
+    <!-- start-smooth-scrolling -->
+    <script src="js/move-top.js"></script>
+    <script src="js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function () {
+            /*
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear' 
+            };
+            */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <script src="js/SmoothScroll.min.js"></script>
+    <!-- //smooth-scrolling-of-move-up -->
+    <!-- Bootstrap core JavaScript
+ ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.js"></script>
+</body>
+
+</html>

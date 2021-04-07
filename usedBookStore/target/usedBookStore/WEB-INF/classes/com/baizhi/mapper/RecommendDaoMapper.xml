@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.RecommendDao">
+    <select id="getAll" resultType="recommend">
+    select * from recommend ;
+  </select>
+
+    <insert id="addRecommend" parameterType="int">
+        insert into recommend(bookId) values(#{bookId})
+    </insert>
+
+    <select id="getBooksByRecommend" resultType="book">
+        select * from books where id in (select bookId from recommend)
+         order by id desc limit 3
+    </select>
+</mapper>
